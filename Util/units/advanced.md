@@ -53,7 +53,16 @@ b.unit // AMP
 By changing the order of the operands, although the actual value of the sums are
 the same, their value is different as the units that express them are different.
 
-#### Angle Wrapping Behavior
+### Angle Arithmetic Wrapping Behavior
+
+Angles also have their own unique behavior within arithmetic expressions. Recall
+the wrapping behavior of `Angle`. What happens when we add two angles that have
+differing wrapping behaviors?
+
+For the purposes of all defined arithmetic methods, `LINEAR` takes strict priority.
+If the `wrapping` of either operand of an operation is `LINEAR`, the result will 
+have a wrapping behavior of `LINEAR`. If all operands are of wrapping behavior
+`WRAPPING`, then the result has a wrapping behavior of `WRAPPING`.
 
 ### Kotlin Extensions
 
