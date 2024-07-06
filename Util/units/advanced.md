@@ -64,7 +64,55 @@ If the `wrapping` of either operand of an operation is `LINEAR`, the result will
 have a wrapping behavior of `LINEAR`. If all operands are of wrapping behavior
 `WRAPPING`, then the result has a wrapping behavior of `WRAPPING`.
 
-### Kotlin Extensions
+### Instantiating Quantities
+
+You may have noticed that throughout the introduction and the advanced section up
+until now, we've really avoided actually instantiating quantities with units. The 
+reason is that there are two ways, with one of them being exclusive to Kotlin users.
+
+#### Unit Constructors 
+
+This is the way you're forced to do it if you are a Java user, and is a lot less
+elegant and natural than the following method.
+
+```kt
+val tile = Distance(FEET, 2.0)
+
+val range = Angle(RADIAN, WRAPPING, PI)
+
+val threshold = Current(MILLI_AMP, 5500.0)
+```
+
+In Java:
+```java
+Distance tile = new Distance(FEET, 2.0)
+
+Angle range = new Angle(RADIAN, WRAPPING, PI)
+
+Current threshold = new Current(MILLI_AMP, 5500.0)
+```
+
+#### Kotlin Extensions
+
+Kotlin offers a much more elegant approach. By utilizing 
+[Kotlin extension functions](https://kotlinlang.org/docs/extensions.html) (also
+known as [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) in other 
+languages), we can have suffixes just like we would write units out in real life.
+
+```kt
+// different distance units
+val tile = 2.feet
+val aura = 50.mm
+
+// different wrapping modes
+val a = PI.rad
+val b = PI.linearRad
+val c = PI.wrappedRad
+```
+
+> **NOTE:** Extensions are not yet offered on `Current`s due to its placement in
+> the `Core` package instead of the `Util`s package as of the most current Dairy
+> release, `pre-release-5`. This will be reworked in a future patch.
 
 #### Angle Extensions
 
