@@ -28,6 +28,31 @@ respectively.
 
 ### Arithmetic Behavior
 
+The entire unit system is completely non-mutating; nothing is modified, only 
+created. All quantities have both a unit and magnitude, and so it is natural to
+ask what the actual unit of any given expression becomes. 
+
+For all defined units, the right-hand side of an operation is converted to match
+the units of the left-hand side. Consequently, it is important to note that this
+means that commutativity does not hold for both magnitudes **and** units.
+
+For example, take the case of an addition between two currents.
+```kt
+val current = Current(1, AMP)
+
+val a = current.intoMilliAmps() + current.intoAmps()
+val b = current.intoAmps() + current.intoMilliAmps()
+
+a.value // 2000
+a.unit // MILLI_AMP
+
+b.value // 2
+b.unit // AMP
+```
+
+By changing the order of the operands, although the actual value of the sums are
+the same, their value is different as the units that express them are different.
+
 #### Angle Wrapping Behavior
 
 ### Kotlin Extensions
