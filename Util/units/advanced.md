@@ -38,15 +38,15 @@ means that commutativity does not hold for both magnitudes **and** units.
 
 For example, take the case of an addition between two currents.
 ```kt
-val current = Current(1, AMP)
+val current = Current(AMP, 1.0)
 
 val a = current.intoMilliAmps() + current.intoAmps()
 val b = current.intoAmps() + current.intoMilliAmps()
 
-a.value // 2000
+a.value // 2000.0
 a.unit // MILLI_AMP
 
-b.value // 2
+b.value // 2.0
 b.unit // AMP
 ```
 
